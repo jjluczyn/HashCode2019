@@ -16,9 +16,9 @@
 
     <constructionHeuristic>
         <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
-        <changeMoveSelector>
-            <selectedCountLimit>1000</selectedCountLimit>
-        </changeMoveSelector>
+        <!--<changeMoveSelector>-->
+            <!--<selectedCountLimit>1000</selectedCountLimit>-->
+        <!--</changeMoveSelector>-->
     </constructionHeuristic>
 
     <localSearch>
@@ -30,10 +30,14 @@
             </changeMoveSelector>
             <swapMoveSelector>
             </swapMoveSelector>
-            <pillarChangeMoveSelector>
-            </pillarChangeMoveSelector>
-            <pillarSwapMoveSelector>
-            </pillarSwapMoveSelector>
+            <!--<pillarChangeMoveSelector>-->
+            <!--</pillarChangeMoveSelector>-->
+            <!--<pillarSwapMoveSelector>-->
+            <!--</pillarSwapMoveSelector>-->
+
+            <subChainChangeMoveSelector></subChainChangeMoveSelector>
+            <subChainSwapMoveSelector></subChainSwapMoveSelector>
+            <tailChainTailSwapMoveSelector></tailChainTailSwapMoveSelector>
         </unionMoveSelector>
         <acceptor>
             <entityTabuRatio>0.1</entityTabuRatio>
