@@ -42,7 +42,7 @@ public class DeltaScoreCalculator extends AbstractIncrementalScoreCalculator<Sol
                 deletePrevSlide((Slide) o);
                 break;
             case "nextSlide":
-                deleteNextSlide((Slide) o);
+                //deleteNextSlide((Slide) o);
                 break;
         }
     }
@@ -55,7 +55,7 @@ public class DeltaScoreCalculator extends AbstractIncrementalScoreCalculator<Sol
                 insertPrevSlide((Slide) o);
                 break;
             case "nextSlide":
-                insertNextSlide((Slide) o);
+                //insertNextSlide((Slide) o);
                 break;
         }
     }
