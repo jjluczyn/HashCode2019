@@ -6,8 +6,9 @@
     <!-- To solve faster by saturating multiple CPU cores -->
     <moveThreadCount>AUTO</moveThreadCount>
 
+    <entityClass>verolog.model.ChainItem</entityClass>
+    <entityClass>verolog.model.Slide</entityClass>
     <solutionClass>verolog.model.Solution</solutionClass>
-    <entityClass>verolog.model.Entity</entityClass>
 
     <scoreDirectorFactory>
         <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
@@ -40,7 +41,6 @@
         <forager>
             <acceptedCountLimit>1000</acceptedCountLimit>
             <finalistPodiumType>STRATEGIC_OSCILLATION</finalistPodiumType>
-
         </forager>
         <!--<acceptor>-->
             <!--<lateAcceptanceSize>400</lateAcceptanceSize>-->
