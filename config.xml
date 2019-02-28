@@ -7,7 +7,7 @@
     <moveThreadCount>AUTO</moveThreadCount>
 
     <solutionClass>verolog.model.Solution</solutionClass>
-    <entityClass>verolog.model.Celdilla</entityClass>
+    <entityClass>verolog.model.Entity</entityClass>
 
     <scoreDirectorFactory>
         <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
