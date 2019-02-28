@@ -1,5 +1,6 @@
 package verolog;
 
+import verolog.model.Slide;
 import verolog.model.Solution;
 import verolog.score.Photo;
 
@@ -40,9 +41,12 @@ public class IO {
                 hori.add(p2);
             }
 
+            List<Slide> slides = new ArrayList<>();
+            vert.forEach(photo -> {
+                slides.add(new Slide(photo.name,photo.tags));
+            });
 
-
-            Solution s = new Solution();
+            Solution s = new Solution(slides);
 
             // TODO parse input
 
