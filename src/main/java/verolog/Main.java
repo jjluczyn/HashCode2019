@@ -4,10 +4,14 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.solver.SolverConfig;
 import org.optaplanner.core.config.solver.termination.TerminationConfig;
+import verolog.model.Anchor;
+import verolog.model.Slide;
 import verolog.model.Solution;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 
@@ -67,5 +71,22 @@ public class Main {
         tconfig.setSecondsSpentLimit(maxSeconds);
         config.setTerminationConfig(tconfig);
         return factory;
+    }
+
+    private void initRandomSol(Solution s){
+        ArrayList<Slide> slides = new ArrayList<>(s.getSlides());
+        Collections.shuffle(slides);
+
+        Anchor anch = s.getAnchors().get(0);
+        anch.setNextSlide(slides.get(0));
+        
+        slides.get(0).setAnchor(anch);
+        slides.get(0).setPrevSlide(anch);
+
+        for (int i = 1; i < slides.size(); i++) {
+            slides.get(i-1).setNextSlide(slides.get(i));
+            slides.get(i).setAnchor(anch);
+            slides.get(i).setPrevSlide(slides.get(i-1));
+        }
     }
 }

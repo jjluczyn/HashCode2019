@@ -13,8 +13,11 @@ public class Slide implements ChainItem{
 
     private String id;
 
+    @AnchorShadowVariable(sourceVariableName = "prevSlide")
+    private Anchor anchor;
     HashSet<String> tags;
-
+    private ChainItem prevSlide;
+    private Slide nextSlide;
     public Slide() {}
 
     public Slide(String id,HashSet<String> tags){
@@ -35,12 +38,6 @@ public class Slide implements ChainItem{
             valueRangeProviderRefs = {"anchors", "slides"},
             graphType = PlanningVariableGraphType.CHAINED
     )
-    private ChainItem prevSlide;
-
-    private Slide nextSlide;
-
-    @AnchorShadowVariable(sourceVariableName = "prevSlide")
-    private Anchor anchor;
 
     @Override
     public Anchor getAnchor() {
@@ -61,12 +58,13 @@ public class Slide implements ChainItem{
         this.nextSlide = s;
     }
 
-    public ChainItem getPreviousRequestDelivered() {
-        return this.prevSlide;
+
+
+    public ChainItem getPrevSlide() {
+        return prevSlide;
     }
 
-    public void setPreviousRequestDelivered(ChainItem prev) {
-        this.prevSlide = prev;
+    public void setPrevSlide(ChainItem prevSlide) {
+        this.prevSlide = prevSlide;
     }
-
 }
