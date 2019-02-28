@@ -16,9 +16,9 @@
 
     <constructionHeuristic>
         <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
-        <!--<changeMoveSelector>-->
-            <!--<selectedCountLimit>1000</selectedCountLimit>-->
-        <!--</changeMoveSelector>-->
+        <changeMoveSelector>
+            <selectedCountLimit>1000</selectedCountLimit>
+        </changeMoveSelector>
     </constructionHeuristic>
 
     <localSearch>
