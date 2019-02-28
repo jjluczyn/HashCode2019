@@ -7,6 +7,7 @@ import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import verolog.model.Anchor;
 import verolog.model.Slide;
 import verolog.model.Solution;
+import verolog.score.FullScoreCalculator;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class Main {
 
         Solution sol = IO.loadInstance(in);
         //initRandomSol(sol);
+        initGreedySol(sol);
         Solution resuelto = solve(sol, maxSeconds, seed, in.getAbsolutePath());
 
         IO.save(resuelto, new File(baseOut));
@@ -94,18 +96,29 @@ public class Main {
         Collections.shuffle(slides);
 
         Anchor anch = s.getAnchors().get(0);
-        anch.setNextSlide(slides.get(slides.size()-1));
 
-        slides.get(slides.size()-1).setAnchor(anch);
-        slides.get(slides.size()-1).setPrevSlide(anch);
-        slides.remove(slides.size()-1);
+        Slide current = slides.remove(slides.size()-1);
 
-        while(slides.size()>2){
+        anch.setNextSlide(current);
+        current.setAnchor(anch);
+        current.setPrevSlide(anch);
+
+        while(!slides.isEmpty()){
             int best = 0;
             int bestPos = 0;
-            for (int i = 0; i < slides.size(); i++) {
-                //FullScoreCalculator.getScore()
+            for (int i = 0; i < (int)Math.sqrt(slides.size()); i++) {
+                int val = FullScoreCalculator.getScore(current,slides.get(i));
+                if (val>=best){
+                    bestPos = i;
+                    best = i;
+                }
             }
+            Slide next = slides.remove(bestPos);
+            current.setNextSlide(next);
+            next.setAnchor(anch);
+            next.setPrevSlide(current);
+
+            current = next;
         }
     }
 }
