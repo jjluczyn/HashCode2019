@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
     <!-- To slowly prove there are no bugs in this code -->
-    <environmentMode>FULL_ASSERT</environmentMode>
+    <!--<environmentMode>FULL_ASSERT</environmentMode>-->
 
     <!-- To solve faster by saturating multiple CPU cores -->
-    <!--<moveThreadCount>AUTO</moveThreadCount>-->
+    <moveThreadCount>AUTO</moveThreadCount>
 
     <entityClass>verolog.model.ChainItem</entityClass>
     <entityClass>verolog.model.Slide</entityClass>
@@ -14,17 +14,17 @@
         <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
     <!--</scoreDirectorFactory>-->
     <scoreDirectorFactory>
-        <incrementalScoreCalculatorClass>verolog.score.DeltaScoreCalculator</incrementalScoreCalculatorClass>
-        <assertionScoreDirectorFactory>
-            <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
-        </assertionScoreDirectorFactory>
+        <!--<incrementalScoreCalculatorClass>verolog.score.DeltaScoreCalculator</incrementalScoreCalculatorClass>-->
+        <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
+        <!--<assertionScoreDirectorFactory>-->
+            <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
+        <!--</assertionScoreDirectorFactory>-->
     </scoreDirectorFactory>
-
 
     <constructionHeuristic>
         <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
         <changeMoveSelector>
-            <selectedCountLimit>1000</selectedCountLimit>
+            <selectedCountLimit>10</selectedCountLimit>
         </changeMoveSelector>
     </constructionHeuristic>
 

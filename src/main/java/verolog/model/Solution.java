@@ -24,7 +24,7 @@ public class Solution {
         this.slides = slides;
         this.anchors = new ArrayList<>();
         anchors.add(new Anchor(true));
-        //anchors.add(new Anchor(false));
+        anchors.add(new Anchor(false));
     }
 
     @PlanningScore
