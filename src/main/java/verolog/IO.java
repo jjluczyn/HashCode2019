@@ -40,7 +40,7 @@ public class IO {
             }
 
             List<Slide> slides = new ArrayList<>();
-            vert.forEach(photo -> {
+            hori.forEach(photo -> {
                 slides.add(new Slide(photo.name,photo.tags));
             });
 
@@ -60,7 +60,17 @@ public class IO {
     public static void save(Solution solution, File f){
         try (PrintWriter pw = new PrintWriter(f)){
 
-
+            StringBuilder sb  = new StringBuilder();
+            Slide aux = solution.getAnchors().get(0).getNextSlide();
+            int slides = 0;
+            while (aux != null){
+                sb.append(aux.getId());
+                sb.append('\n');
+                slides++;
+            }
+            pw.println(slides);
+            pw.print(sb.toString());
+            pw.flush();
             // TODO export Solution to file
 
         } catch (FileNotFoundException e) {
