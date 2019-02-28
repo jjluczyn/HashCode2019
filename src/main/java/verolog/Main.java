@@ -32,7 +32,7 @@ public class Main {
         System.out.println(String.format("[%s] Loading file %s", LocalDateTime.now().toString(), in.getAbsolutePath()));
 
         Solution sol = IO.loadInstance(in);
-
+        initRandomSol(sol);
         Solution resuelto = solve(sol, maxSeconds, seed, in.getAbsolutePath());
 
         IO.save(resuelto, new File(baseOut));
@@ -73,13 +73,13 @@ public class Main {
         return factory;
     }
 
-    private void initRandomSol(Solution s){
+    public static void initRandomSol(Solution s){
         ArrayList<Slide> slides = new ArrayList<>(s.getSlides());
         Collections.shuffle(slides);
 
         Anchor anch = s.getAnchors().get(0);
         anch.setNextSlide(slides.get(0));
-        
+
         slides.get(0).setAnchor(anch);
         slides.get(0).setPrevSlide(anch);
 
