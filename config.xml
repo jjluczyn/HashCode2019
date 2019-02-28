@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+    <!-- To slowly prove there are no bugs in this code -->
+    <!--<environmentMode>FULL_ASSERT</environmentMode>-->
+
+    <!-- To solve faster by saturating multiple CPU cores -->
+    <moveThreadCount>AUTO</moveThreadCount>
+
+    <solutionClass>verolog.model.Solution</solutionClass>
+    <entityClass>verolog.model.Celdilla</entityClass>
+
+    <scoreDirectorFactory>
+        <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
+    </scoreDirectorFactory>
+
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+        <changeMoveSelector>
+            <selectedCountLimit>1000</selectedCountLimit>
+        </changeMoveSelector>
+    </constructionHeuristic>
+
+    <localSearch>
+        <termination>
+            <unimprovedSecondsSpentLimit>600</unimprovedSecondsSpentLimit>
+        </termination>
+        <unionMoveSelector>
+            <changeMoveSelector>
+            </changeMoveSelector>
+            <swapMoveSelector>
+            </swapMoveSelector>
+            <pillarChangeMoveSelector>
+            </pillarChangeMoveSelector>
+            <pillarSwapMoveSelector>
+            </pillarSwapMoveSelector>
+        </unionMoveSelector>
+        <acceptor>
+            <entityTabuRatio>0.1</entityTabuRatio>
+        </acceptor>
+        <forager>
+            <acceptedCountLimit>1000</acceptedCountLimit>
+            <finalistPodiumType>STRATEGIC_OSCILLATION</finalistPodiumType>
+
+        </forager>
+        <!--<acceptor>-->
+            <!--<lateAcceptanceSize>400</lateAcceptanceSize>-->
+        <!--</acceptor>-->
+        <!--<forager>-->
+            <!--<acceptedCountLimit>1</acceptedCountLimit>-->
+        <!--</forager>-->
+</localSearch>
+</solver>
