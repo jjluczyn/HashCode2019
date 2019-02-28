@@ -54,7 +54,7 @@ public class Main {
             System.out.println(String.format("Broken constraints: %s -- Best value found: %s", finalScore[0], finalScore[1]));
         }
 
-        return sol;
+        return resuelto;
     }
 
     private static Solver<Solution> buildSolver(long maxSeconds, long seed){
