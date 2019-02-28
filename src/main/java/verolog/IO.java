@@ -42,7 +42,7 @@ public class IO {
             }
 
             List<Slide> slides = new ArrayList<>();
-            vert.forEach(photo -> {
+            hori.forEach(photo -> {
                 slides.add(new Slide(photo.name,photo.tags));
             });
 
