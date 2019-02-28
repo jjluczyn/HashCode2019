@@ -6,20 +6,24 @@ import org.optaplanner.core.api.domain.variable.AnchorShadowVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 
-import java.util.Set;
+import java.util.HashSet;
 
 @PlanningEntity
 public class Slide implements ChainItem{
 
     private String id;
 
-    Set<String> tags;
+    HashSet<String> tags;
 
     public Slide() {}
 
-    public Slide(String id, Set<String> tags){
+    public Slide(String id,HashSet<String> tags){
         this.id = id;
         this.tags = tags;
+    }
+
+    public HashSet<String> getTags() {
+        return tags;
     }
 
     @PlanningId

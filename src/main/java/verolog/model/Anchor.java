@@ -16,6 +16,10 @@ public class Anchor implements ChainItem{
     public Anchor() {
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
     @Override
     public Anchor getAnchor() {
         return this;
