@@ -33,7 +33,7 @@
 
             <subChainChangeMoveSelector></subChainChangeMoveSelector>
             <subChainSwapMoveSelector></subChainSwapMoveSelector>
-            <tailChainTailSwapMoveSelector></tailChainTailSwapMoveSelector>
+            <tailChainSwapMoveSelector></tailChainSwapMoveSelector>
         </unionMoveSelector>
         <!--<acceptor>-->
             <!--<entityTabuRatio>0.1</entityTabuRatio>-->

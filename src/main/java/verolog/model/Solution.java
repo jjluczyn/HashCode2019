@@ -12,7 +12,6 @@ import java.util.List;
 @PlanningSolution
 public class Solution {
 
-    @PlanningEntityCollectionProperty
     List<Slide> slides;
 
     List<Anchor> anchors;
