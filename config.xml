@@ -14,12 +14,12 @@
         <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
     </scoreDirectorFactory>
 
-    <constructionHeuristic>
-        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
-        <changeMoveSelector>
-            <selectedCountLimit>1000</selectedCountLimit>
-        </changeMoveSelector>
-    </constructionHeuristic>
+    <!--<constructionHeuristic>-->
+        <!--<constructionHeuristicType>FIRST_FIT</constructionHeuristicType>-->
+        <!--<changeMoveSelector>-->
+            <!--<selectedCountLimit>1000</selectedCountLimit>-->
+        <!--</changeMoveSelector>-->
+    <!--</constructionHeuristic>-->
 
     <localSearch>
         <termination>

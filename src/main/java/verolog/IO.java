@@ -67,6 +67,7 @@ public class IO {
                 sb.append(aux.getId());
                 sb.append('\n');
                 slides++;
+                aux = aux.getNextSlide();
             }
             pw.println(slides);
             pw.print(sb.toString());
