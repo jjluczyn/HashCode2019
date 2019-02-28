@@ -29,9 +29,7 @@ public class IO {
                     vert.add(new Photo(true,tags,i+""));
                 }
             }
-            Collections.sort(vert,(p1, p2) -> {
-                return Integer.compare(p1.tags.size(),p2.tags.size());
-            });
+            vert.sort(Comparator.comparingInt(p -> p.tags.size()));
             while (vert.size()>2){
                 Photo p1 = vert.removeLast();
                 Photo p2 = vert.removeFirst();
