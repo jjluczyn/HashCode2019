@@ -10,16 +10,23 @@
     <entityClass>verolog.model.Slide</entityClass>
     <solutionClass>verolog.model.Solution</solutionClass>
 
+    <!--<scoreDirectorFactory>-->
+        <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
+    <!--</scoreDirectorFactory>-->
     <scoreDirectorFactory>
+        <!--<incrementalScoreCalculatorClass>verolog.score.DeltaScoreCalculator</incrementalScoreCalculatorClass>-->
         <easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>
+        <!--<assertionScoreDirectorFactory>-->
+            <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
+        <!--</assertionScoreDirectorFactory>-->
     </scoreDirectorFactory>
 
-    <!--<constructionHeuristic>-->
-        <!--<constructionHeuristicType>FIRST_FIT</constructionHeuristicType>-->
-        <!--<changeMoveSelector>-->
-            <!--<selectedCountLimit>1000</selectedCountLimit>-->
-        <!--</changeMoveSelector>-->
-    <!--</constructionHeuristic>-->
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+        <changeMoveSelector>
+            <selectedCountLimit>10</selectedCountLimit>
+        </changeMoveSelector>
+    </constructionHeuristic>
 
     <localSearch>
         <termination>

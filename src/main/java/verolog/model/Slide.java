@@ -15,6 +15,7 @@ public class Slide implements ChainItem{
 
     @AnchorShadowVariable(sourceVariableName = "prevSlide")
     private Anchor anchor;
+
     HashSet<String> tags;
 
     @PlanningVariable(

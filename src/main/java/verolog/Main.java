@@ -39,7 +39,6 @@ public class Main {
         System.out.println(String.format("[%s] Finished processing %s", LocalDateTime.now().toString(), in.getAbsolutePath()));
     }
 
-
     // TODO IF YOU DO NOT WANT TO USE OPTAPLANNER OR WANT TO MODIFY THE SOLVING ORDER MODIFY THIS METHOD
     public static Solution solve(Solution sol, long maxSeconds, long seed, String solutionName){
         Solver<Solution> solver = buildSolver(maxSeconds, seed);
