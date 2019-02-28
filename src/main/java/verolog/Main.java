@@ -32,7 +32,7 @@ public class Main {
         System.out.println(String.format("[%s] Loading file %s", LocalDateTime.now().toString(), in.getAbsolutePath()));
 
         Solution sol = IO.loadInstance(in);
-        initRandomSol(sol);
+        //initRandomSol(sol);
         Solution resuelto = solve(sol, maxSeconds, seed, in.getAbsolutePath());
 
         IO.save(resuelto, new File(baseOut));
@@ -87,6 +87,26 @@ public class Main {
             slides.get(i-1).setNextSlide(slides.get(i));
             slides.get(i).setAnchor(anch);
             slides.get(i).setPrevSlide(slides.get(i-1));
+        }
+    }
+
+    public static void initGreedySol(Solution s){
+        ArrayList<Slide> slides = new ArrayList<>(s.getSlides());
+        Collections.shuffle(slides);
+
+        Anchor anch = s.getAnchors().get(0);
+        anch.setNextSlide(slides.get(slides.size()-1));
+
+        slides.get(slides.size()-1).setAnchor(anch);
+        slides.get(slides.size()-1).setPrevSlide(anch);
+        slides.remove(slides.size()-1);
+
+        while(slides.size()>2){
+            int best = 0;
+            int bestPos = 0;
+            for (int i = 0; i < slides.size(); i++) {
+                //FullScoreCalculator.getScore()
+            }
         }
     }
 }

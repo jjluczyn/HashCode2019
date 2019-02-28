@@ -31,8 +31,8 @@ public class IO {
             }
             vert.sort(Comparator.comparingInt(p -> p.tags.size()));
             while (vert.size()>2){
-                Photo p1 = vert.removeLast();
-                Photo p2 = vert.removeFirst();
+                Photo p1 = vert.removeFirst();
+                Photo p2 = vert.removeLast();
                 p2.tags.addAll(p1.tags);
                 p2.name = p2.name+" "+p1.name;
                 p2.vertical = false;
