@@ -19,7 +19,7 @@ public class IO {
             LinkedList<Photo> vert = new LinkedList<>();
             for (int i = 0; i < photoNum; i++) {
                 String[] parts = br.readLine().split(" ");
-                Set<String> tags = new HashSet<String>();
+                HashSet<String> tags = new HashSet<String>();
                 for (int j = 2; j < parts.length; j++) {
                     tags.add(parts[j]);
                 }
@@ -59,6 +59,7 @@ public class IO {
 
     public static void save(Solution solution, File f){
         try (PrintWriter pw = new PrintWriter(f)){
+
 
             // TODO export Solution to file
 
