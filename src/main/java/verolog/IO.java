@@ -15,7 +15,8 @@ public class IO {
 
 
             int photoNum = Integer.parseInt(br.readLine());
-            ArrayList<Photo> hori = new ArrayList<>();
+            LinkedList<Photo> hori = new LinkedList<>();
+            LinkedList<Photo> newhori = new LinkedList<>();
             LinkedList<Photo> vert = new LinkedList<>();
             for (int i = 0; i < photoNum; i++) {
                 String[] parts = br.readLine().split(" ");
@@ -30,6 +31,7 @@ public class IO {
                 }
             }
             vert.sort(Comparator.comparingInt(p -> p.tags.size()));
+
             while (vert.size()>2){
                 Photo p1 = vert.removeFirst();
                 Photo p2 = vert.removeLast();
@@ -37,7 +39,45 @@ public class IO {
                 p2.name = p2.name+" "+p1.name;
                 p2.vertical = false;
                 hori.add(p2);
+
             }
+            hori.sort(Comparator.comparingInt(p -> p.tags.size()));
+            while (!hori.isEmpty()){
+                Photo p1 = hori.removeFirst();
+                newhori.add(p1);
+                if(!hori.isEmpty()) {
+                    Photo p2 = hori.removeLast();
+                    newhori.add(p2);
+                }
+            }
+            hori.clear();
+            hori.addAll(newhori);
+            /*
+            while (vert.size()>2){
+                Photo p1 = vert.removeFirst();
+                Photo p2 = vert.removeLast();
+                p1.tags.addAll(p2.tags);
+                p1.name = p1.name+" "+p2.name;
+                p1.vertical = false;
+                hori.add(p1);
+            }*/
+            //Random
+            /*
+            while(vert.size()>2)
+            {
+                Random r = new Random();
+                int val = r.nextInt(vert.size());
+                Photo p1 = vert.get(val);
+                vert.remove(val);
+                val = r.nextInt(vert.size());
+                Photo p2 = vert.get(val);
+                vert.remove(val);
+                p2.tags.addAll(p1.tags);
+                p2.name = p2.name+" "+p1.name;
+                p2.vertical = false;
+                hori.add(p2);
+            }
+            */
 
             List<Slide> slides = new ArrayList<>();
             hori.forEach(photo -> {
@@ -45,11 +85,6 @@ public class IO {
             });
 
             Solution s = new Solution(slides);
-
-            // TODO parse input
-
-
-
 
             return s;
         } catch (IOException e) {

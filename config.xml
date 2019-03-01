@@ -42,18 +42,18 @@
             <subChainSwapMoveSelector></subChainSwapMoveSelector>
             <tailChainSwapMoveSelector></tailChainSwapMoveSelector>
         </unionMoveSelector>
-        <!--<acceptor>-->
-            <!--<entityTabuRatio>0.1</entityTabuRatio>-->
-        <!--</acceptor>-->
-        <!--<forager>-->
-            <!--<acceptedCountLimit>1000</acceptedCountLimit>-->
-            <!--<finalistPodiumType>STRATEGIC_OSCILLATION</finalistPodiumType>-->
-        <!--</forager>-->
         <acceptor>
-            <lateAcceptanceSize>400</lateAcceptanceSize>
+            <entityTabuRatio>0.1</entityTabuRatio>
         </acceptor>
         <forager>
-            <acceptedCountLimit>1</acceptedCountLimit>
+            <acceptedCountLimit>1000</acceptedCountLimit>
+            <finalistPodiumType>STRATEGIC_OSCILLATION</finalistPodiumType>
         </forager>
+        <!--<acceptor>-->
+            <!--<lateAcceptanceSize>400</lateAcceptanceSize>-->
+        <!--</acceptor>-->
+        <!--<forager>-->
+            <!--<acceptedCountLimit>1</acceptedCountLimit>-->
+        <!--</forager>-->
 </localSearch>
 </solver>

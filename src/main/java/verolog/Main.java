@@ -34,7 +34,9 @@ public class Main {
 
         Solution sol = IO.loadInstance(in);
         //initRandomSol(sol);
-        initGreedySol(sol);
+        //initGreedySol(sol);
+        //initReverseLinear(sol);
+        //initLinear(sol);
         Solution resuelto = solve(sol, maxSeconds, seed, in.getAbsolutePath());
 
         IO.save(resuelto, new File(baseOut));
@@ -73,7 +75,36 @@ public class Main {
         config.setTerminationConfig(tconfig);
         return factory;
     }
+    public static void initReverseLinear(Solution s){
+        ArrayList<Slide> slides = new ArrayList<>(s.getSlides());
 
+        Anchor anch = s.getAnchors().get(0);
+        anch.setNextSlide(slides.get(slides.size()-1));
+
+        slides.get(slides.size()-1).setAnchor(anch);
+        slides.get(slides.size()-1).setPrevSlide(anch);
+
+        for (int i = slides.size()-2; i >=0; i--) {
+            slides.get(i+1).setNextSlide(slides.get(i));
+            slides.get(i).setAnchor(anch);
+            slides.get(i).setPrevSlide(slides.get(i+1));
+        }
+    }
+    public static void initLinear(Solution s){
+        ArrayList<Slide> slides = new ArrayList<>(s.getSlides());
+
+        Anchor anch = s.getAnchors().get(0);
+        anch.setNextSlide(slides.get(0));
+
+        slides.get(0).setAnchor(anch);
+        slides.get(0).setPrevSlide(anch);
+
+        for (int i = 1; i < slides.size(); i++) {
+            slides.get(i-1).setNextSlide(slides.get(i));
+            slides.get(i).setAnchor(anch);
+            slides.get(i).setPrevSlide(slides.get(i-1));
+        }
+    }
     public static void initRandomSol(Solution s){
         ArrayList<Slide> slides = new ArrayList<>(s.getSlides());
         Collections.shuffle(slides);
