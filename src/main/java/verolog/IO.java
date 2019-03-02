@@ -12,7 +12,7 @@ public class IO {
 
     public static Solution loadInstance(File f){
         try(BufferedReader br = new BufferedReader(new FileReader(f));
-            BufferedReader pairR = new BufferedReader(new InputStreamReader(new FileInputStream("in/ePairs.in")));){
+            BufferedReader pairR = new BufferedReader(new InputStreamReader(new FileInputStream(f.getAbsolutePath()+"Pairs.in")));){
 
 
             int photoNum = Integer.parseInt(br.readLine());
