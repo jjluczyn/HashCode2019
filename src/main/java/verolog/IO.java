@@ -1,5 +1,6 @@
 package verolog;
 
+import verolog.model.Anchor;
 import verolog.model.Slide;
 import verolog.model.Solution;
 import verolog.score.Photo;
@@ -11,15 +12,10 @@ import java.util.*;
 public class IO {
 
     public static Solution loadInstance(File f){
-        try(BufferedReader br = new BufferedReader(new FileReader(f));
-            BufferedReader pairR = new BufferedReader(new InputStreamReader(new FileInputStream(f.getAbsolutePath()+"Pairs.in")));){
-
-
+        try(BufferedReader br = new BufferedReader(new FileReader(f))){
             int photoNum = Integer.parseInt(br.readLine());
             LinkedList<Photo> hori = new LinkedList<>();
-            LinkedList<Photo> newhori = new LinkedList<>();
-            HashMap<String,Photo> verticales = new HashMap<>();
-            //LinkedList<Photo> vert = new LinkedList<>();
+            LinkedList<Photo> vert = new LinkedList<>();
             for (int i = 0; i < photoNum; i++) {
                 String[] parts = br.readLine().split(" ");
                 HashSet<String> tags = new HashSet<String>();
@@ -29,48 +25,18 @@ public class IO {
                 if (parts[0].equals("H")){
                     hori.add(new Photo(false,tags,i+""));
                 } else {
-                    //vert.add(new Photo(true,tags,i+""));
-                    verticales.put(i+"",new Photo(true,tags,i+""));
+                    vert.add(new Photo(true,tags,i+""));
                 }
             }
-
-            pairR.readLine();
-            String line = pairR.readLine();
-            while (line!=null && !line.isEmpty()){
-                String[] parts = line.split(" ");
-                if (parts.length == 2){
-                    Photo aux1 = verticales.remove(parts[0]);
-                    Photo aux2 = verticales.remove(parts[1]);
-                    aux1.name = aux1.name+" "+aux2.name;
-                    aux1.tags.addAll(aux2.tags);
-                    aux1.vertical = false;
-                    hori.addLast(aux1);
-                }
-                line = pairR.readLine();
+            vert.sort(Comparator.comparingInt(p -> p.tags.size()));
+            while (vert.size()>=2){
+                Photo p1 = vert.removeFirst();
+                Photo p2 = vert.removeLast();
+                p2.tags.addAll(p1.tags);
+                p2.name = p2.name+" "+p1.name;
+                p2.vertical = false;
+                hori.add(p2);
             }
-            Iterator<Map.Entry<String ,Photo>> it = verticales.entrySet().iterator();
-            while (verticales.size()>1){
-                var aux1 = it.next();
-                it.remove();
-                var aux2 = it.next();
-                it.remove();
-                Photo p1 = aux1.getValue();
-                Photo p2 = aux2.getValue();
-                p1.name = p1.name + " " + p2.name;
-                p1.tags.addAll(p2.tags);
-                p1.vertical = false;
-                hori.addLast(p1);
-            }
-//            vert.sort(Comparator.comparingInt(p -> p.tags.size()));
-//            while (vert.size()>=2){
-//                Photo p1 = vert.removeFirst();
-//                Photo p2 = vert.removeLast();
-//                p2.tags.addAll(p1.tags);
-//                p2.name = p2.name+" "+p1.name;
-//                p2.vertical = false;
-//                hori.add(p2);
-//            }
-
             //Random
             /*
             while(vert.size()>=2)
@@ -89,14 +55,12 @@ public class IO {
             }
             */
 
-            hori.sort(Comparator.comparingInt(p -> -p.tags.size()));
+            //hori.sort(Comparator.comparingInt(p -> -p.tags.size()));
             List<Slide> slides = new ArrayList<>();
             hori.forEach(photo -> {
                 slides.add(new Slide(photo.name,photo.tags));
             });
-
             Solution s = new Solution(slides);
-
             return s;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -121,6 +85,64 @@ public class IO {
             // TODO export Solution to file
 
         } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Solution loadInitSol(File f){
+        try(BufferedReader br = new BufferedReader(new FileReader(f));
+            BufferedReader pairs = new BufferedReader(new InputStreamReader(new FileInputStream(f.getAbsolutePath()+".sol")))){
+
+            int photoNum = Integer.parseInt(br.readLine());
+            HashMap<String,Photo> cosas = new HashMap<>();
+            for (int i = 0; i < photoNum; i++) {
+                String[] parts = br.readLine().split(" ");
+                HashSet<String> tags = new HashSet<String>();
+                for (int j = 2; j < parts.length; j++) {
+                    tags.add(parts[j]);
+                }
+                cosas.put(i+"",new Photo(false,tags,i+""));
+            }
+
+
+            Solution s = new Solution(new ArrayList<>());
+
+            Anchor anchor = s.getAnchors().get(0);
+
+            int inis = Integer.parseInt(pairs.readLine());
+            String[] parts = pairs.readLine().split(" ");
+            Slide prev = null;
+            if (parts.length == 2){
+                cosas.get(parts[0]).tags.addAll(cosas.get(parts[1]).tags);
+                Slide aux = new Slide(parts[0]+" "+parts[1],cosas.get(parts[0]).tags);
+                prev = aux;
+            } else {
+                Slide aux = new Slide(parts[0],cosas.get(parts[0]).tags);
+                prev = aux;
+            }
+            s.getSlides().add(prev);
+            anchor.setNextSlide(prev);
+            prev.setAnchor(anchor);
+            prev.setPrevSlide(anchor);
+            for (int i = 1; i < inis; i++) {
+                parts = pairs.readLine().split(" ");
+                Slide slide = null;
+                if (parts.length == 2){
+                    cosas.get(parts[0]).tags.addAll(cosas.get(parts[1]).tags);
+                    Slide aux = new Slide(parts[0]+" "+parts[1],cosas.get(parts[0]).tags);
+                    slide = aux;
+                } else {
+                    Slide aux = new Slide(parts[0],cosas.get(parts[0]).tags);
+                    slide = aux;
+                }
+                prev.setNextSlide(slide);
+                slide.setAnchor(anchor);
+                slide.setPrevSlide(prev);
+                prev = slide;
+                s.getSlides().add(prev);
+            }
+            return s;
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
