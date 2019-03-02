@@ -41,7 +41,7 @@ public class IO {
                 if (parts.length == 2){
                     Photo aux1 = verticales.remove(parts[0]);
                     Photo aux2 = verticales.remove(parts[1]);
-                    aux1.name = aux1+" "+aux2;
+                    aux1.name = aux1.name+" "+aux2.name;
                     aux1.tags.addAll(aux2.tags);
                     aux1.vertical = false;
                     hori.addLast(aux1);
