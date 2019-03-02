@@ -8,7 +8,8 @@ import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 
 import java.util.HashSet;
 
-@PlanningEntity
+@PlanningEntity(difficultyWeightFactoryClass = SlideWeightComparator.class)
+//@PlanningEntity()
 public class Slide implements ChainItem{
 
     private String id;

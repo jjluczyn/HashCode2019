@@ -32,7 +32,7 @@ public class IO {
             }
             vert.sort(Comparator.comparingInt(p -> p.tags.size()));
 
-            while (vert.size()>2){
+            while (vert.size()>=2){
                 Photo p1 = vert.removeFirst();
                 Photo p2 = vert.removeLast();
                 p2.tags.addAll(p1.tags);
@@ -41,8 +41,7 @@ public class IO {
                 hori.add(p2);
 
             }
-            hori.sort(Comparator.comparingInt(p -> p.tags.size()));
-            while (!hori.isEmpty()){
+            /*while (!hori.isEmpty()){
                 Photo p1 = hori.removeFirst();
                 newhori.add(p1);
                 if(!hori.isEmpty()) {
@@ -51,8 +50,8 @@ public class IO {
                 }
             }
             hori.clear();
-            hori.addAll(newhori);
-            /*
+            hori.addAll(newhori);*/
+
             while (vert.size()>2){
                 Photo p1 = vert.removeFirst();
                 Photo p2 = vert.removeLast();
@@ -60,10 +59,10 @@ public class IO {
                 p1.name = p1.name+" "+p2.name;
                 p1.vertical = false;
                 hori.add(p1);
-            }*/
+            }
             //Random
             /*
-            while(vert.size()>2)
+            while(vert.size()>=2)
             {
                 Random r = new Random();
                 int val = r.nextInt(vert.size());
@@ -79,6 +78,7 @@ public class IO {
             }
             */
 
+            hori.sort(Comparator.comparingInt(p -> -p.tags.size()));
             List<Slide> slides = new ArrayList<>();
             hori.forEach(photo -> {
                 slides.add(new Slide(photo.name,photo.tags));

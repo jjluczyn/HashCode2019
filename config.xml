@@ -10,22 +10,29 @@
     <entityClass>verolog.model.Slide</entityClass>
     <solutionClass>verolog.model.Solution</solutionClass>
 
+
+
     <!--<scoreDirectorFactory>-->
-        <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
-    <!--</scoreDirectorFactory>-->
-    <scoreDirectorFactory>
-        <incrementalScoreCalculatorClass>verolog.score.DeltaScoreCalculator</incrementalScoreCalculatorClass>
-        <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
+        <!--&lt;!&ndash;<easyScoreCalculatorClass>verolog.score.FullScoreCalculatorV2</easyScoreCalculatorClass>&ndash;&gt;-->
+        <!--<incrementalScoreCalculatorClass>verolog.score.DeltaScoreCalculator</incrementalScoreCalculatorClass>-->
         <!--<assertionScoreDirectorFactory>-->
             <!--<easyScoreCalculatorClass>verolog.score.FullScoreCalculator</easyScoreCalculatorClass>-->
         <!--</assertionScoreDirectorFactory>-->
+    <!--</scoreDirectorFactory>-->
+
+    <scoreDirectorFactory>
+        <incrementalScoreCalculatorClass>verolog.score.DeltaScoreCalculator</incrementalScoreCalculatorClass>
     </scoreDirectorFactory>
 
+    <!--<constructionHeuristic>-->
+        <!--<constructionHeuristicType>FIRST_FIT</constructionHeuristicType>-->
+        <!--<changeMoveSelector>-->
+            <!--<selectedCountLimit>1000</selectedCountLimit>-->
+        <!--</changeMoveSelector>-->
+    <!--</constructionHeuristic>-->
+
     <constructionHeuristic>
-        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
-        <changeMoveSelector>
-            <selectedCountLimit>1000</selectedCountLimit>
-        </changeMoveSelector>
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
     </constructionHeuristic>
 
     <localSearch>
