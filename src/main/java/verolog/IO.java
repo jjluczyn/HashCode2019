@@ -11,13 +11,15 @@ import java.util.*;
 public class IO {
 
     public static Solution loadInstance(File f){
-        try(BufferedReader br = new BufferedReader(new FileReader(f))){
+        try(BufferedReader br = new BufferedReader(new FileReader(f));
+            BufferedReader pairR = new BufferedReader(new InputStreamReader(new FileInputStream("in/ePairs.in")));){
 
 
             int photoNum = Integer.parseInt(br.readLine());
             LinkedList<Photo> hori = new LinkedList<>();
             LinkedList<Photo> newhori = new LinkedList<>();
-            LinkedList<Photo> vert = new LinkedList<>();
+            HashMap<String,Photo> verticales = new HashMap<>();
+            //LinkedList<Photo> vert = new LinkedList<>();
             for (int i = 0; i < photoNum; i++) {
                 String[] parts = br.readLine().split(" ");
                 HashSet<String> tags = new HashSet<String>();
@@ -27,39 +29,48 @@ public class IO {
                 if (parts[0].equals("H")){
                     hori.add(new Photo(false,tags,i+""));
                 } else {
-                    vert.add(new Photo(true,tags,i+""));
+                    //vert.add(new Photo(true,tags,i+""));
+                    verticales.put(i+"",new Photo(true,tags,i+""));
                 }
             }
-            vert.sort(Comparator.comparingInt(p -> p.tags.size()));
 
-            while (vert.size()>=2){
-                Photo p1 = vert.removeFirst();
-                Photo p2 = vert.removeLast();
-                p2.tags.addAll(p1.tags);
-                p2.name = p2.name+" "+p1.name;
-                p2.vertical = false;
-                hori.add(p2);
-
-            }
-            /*while (!hori.isEmpty()){
-                Photo p1 = hori.removeFirst();
-                newhori.add(p1);
-                if(!hori.isEmpty()) {
-                    Photo p2 = hori.removeLast();
-                    newhori.add(p2);
+            pairR.readLine();
+            String line = pairR.readLine();
+            while (line!=null && !line.isEmpty()){
+                String[] parts = line.split(" ");
+                if (parts.length == 2){
+                    Photo aux1 = verticales.remove(parts[0]);
+                    Photo aux2 = verticales.remove(parts[1]);
+                    aux1.name = aux1+" "+aux2;
+                    aux1.tags.addAll(aux2.tags);
+                    aux1.vertical = false;
+                    hori.addLast(aux1);
                 }
+                line = pairR.readLine();
             }
-            hori.clear();
-            hori.addAll(newhori);*/
-
-            while (vert.size()>2){
-                Photo p1 = vert.removeFirst();
-                Photo p2 = vert.removeLast();
+            Iterator<Map.Entry<String ,Photo>> it = verticales.entrySet().iterator();
+            while (verticales.size()>1){
+                var aux1 = it.next();
+                it.remove();
+                var aux2 = it.next();
+                it.remove();
+                Photo p1 = aux1.getValue();
+                Photo p2 = aux2.getValue();
+                p1.name = p1.name + " " + p2.name;
                 p1.tags.addAll(p2.tags);
-                p1.name = p1.name+" "+p2.name;
                 p1.vertical = false;
-                hori.add(p1);
+                hori.addLast(p1);
             }
+//            vert.sort(Comparator.comparingInt(p -> p.tags.size()));
+//            while (vert.size()>=2){
+//                Photo p1 = vert.removeFirst();
+//                Photo p2 = vert.removeLast();
+//                p2.tags.addAll(p1.tags);
+//                p2.name = p2.name+" "+p1.name;
+//                p2.vertical = false;
+//                hori.add(p2);
+//            }
+
             //Random
             /*
             while(vert.size()>=2)
