@@ -23,8 +23,8 @@ public class SlideWeightComparator  implements SelectionSorterWeightFactory<Solu
             @Override
             public int compareTo(SlideDifficultyComparator other) {
                 int res = Integer.compare(this.sizeTags,other.sizeTags);
-                if(res==0) return this.s.getId().compareTo(other.s.getId());
-               // if(res==0) return other.s.getId().compareTo(this.s.getId());
+                //if(res==0) return this.s.getId().compareTo(other.s.getId());
+                 if(res==0) return other.s.getId().compareTo(this.s.getId());
                 return res;
             }
         }
